@@ -10,7 +10,7 @@ public class SjhSqlQueryMap {
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(" SELECT							\n");
-		sb.append("		 	S.SNO	        SNO		\n");
+		sb.append("		 	 S.SNO	        SNO		\n");
 		sb.append(" 		,S.SNAME	   	SNAME	\n");
 		sb.append(" 		,S.SPW	        SPW		\n");
 		sb.append(" 		,S.SBIRTH	   	SBIRTH	\n");
