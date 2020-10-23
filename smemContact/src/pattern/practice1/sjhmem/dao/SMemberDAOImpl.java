@@ -5,12 +5,70 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import pattern.practice1.sjhmem.common.SjhChaebun;
 import pattern.practice1.sjhmem.common.SjhConnProperty;
 import pattern.practice1.sjhmem.sql.SjhSqlQueryMap;
 import pattern.practice1.sjhmem.vo.SMemberVO;
 
 public class SMemberDAOImpl implements SMemberDAO {
 
+	// 1.회원등록
+	public boolean sMemInsert(SMemberVO smvo){
+		System.out.println("[log] SMemberDAOImpl.sMemInsert 함수 호출!\n"
+								+ "데이터 확인 >>> smvo.getSname : " + smvo.getSname());
+		boolean insertBool = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int nCntInsert = 0;
+		
+		try {
+			// db연결
+			con = SjhConnProperty.getConnection();
+			pstmt = con.prepareStatement(SjhSqlQueryMap.getInsertQuery());
+			
+			// 자동 커밋
+//			setAutoCommit(boolean autoCommit)
+			// Sets this connection's auto-commit mode to the given state.
+			
+			System.out.println("SjhChaebun.SMemChaebun() : " + SjhChaebun.SMemChaebun());
+			pstmt.setString(1, SjhChaebun.SMemChaebun());
+			pstmt.setString(2, smvo.getSname());
+			pstmt.setString(3, smvo.getSpw());
+			pstmt.setString(4, smvo.getSbirth());
+			pstmt.setString(5, smvo.getShp());
+			pstmt.setString(6, smvo.getSmail());
+			pstmt.setString(7, smvo.getSpost());
+			pstmt.setString(8, smvo.getSaddr());
+			pstmt.setString(9, "Y");
+			
+			nCntInsert = pstmt.executeUpdate();
+			System.out.println("업데이트 갯수 nCntInsert : " + nCntInsert);
+			
+			// 자동 커밋
+//			boolean b = !con.getAutoCommit();
+//			System.out.println("b >>> : " + b);
+//			if (b) con.commit();
+			
+			SjhConnProperty.conClose(con, pstmt);
+			System.out.println("[log] db연결 종료");
+		} catch (Exception e) {
+			System.out.println("에러가 111 >>> " + e.getMessage());
+		} finally{
+			SjhConnProperty.conClose(con, pstmt);
+			System.out.println("[log] db연결 종료");
+		}// end of try catch
+		
+		if(nCntInsert==1){
+			insertBool = true;
+		}else{
+			System.out.println("insert 실패");
+		}// end of if
+		
+		System.out.println("insertBool : " + insertBool);
+		
+		return insertBool;
+	}// end of sMemInsert(회원등록)
+	
 	// 4.전체조회
 	@Override
 	public ArrayList<SMemberVO> sMemSelect() {

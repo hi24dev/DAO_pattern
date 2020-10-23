@@ -9,34 +9,60 @@ import pattern.practice1.sjhmem.vo.SMemberVO;
 
 public class SMemberScr {
 
-
+//	String sno = "";
+//	String sname = "";
+//	String spw = "";
+//	String sbirth = "";
+//	String shp = "";
+//	String smail = "";
+//	String spost = "";
+//	String saddr = "";
+//	String sinsertdate = "";
+//	String supdatedate = "";
+//	String sdeleteyn = "";
 	
 	// 1. insert 함수
-//	public void sMemInsert(String sMemData){
-//		System.out.println("[log] sMemInsert 함수 시작, sMemData : " + sMemData);
-//		
-//		String sData = sMemData;
-//		String[] sDataArray = sData.split("/");
-//		System.out.println("sDataArray 길이 : " + sDataArray.length);
-//		
-//		// 데이터 분기 후 vo에 넣기
-//		sName = sDataArray[0];
-//		sPw = sDataArray[1];
-//		sBirth = sDataArray[2];
-//		sHp = sDataArray[3];
-//		sMail = sDataArray[4];
-//		sPost = sDataArray[5];
-//		sAddr = sDataArray[6];
-//
-//		System.out.println("데이터 확인 sName:" + sName
-//						+ "/sPw:" + sPw
-//						+ "/sBirth:" + sBirth
-//						+ "/sHp:" + sHp
-//						+ "/sMail:" + sMail
-//						+ "/sPost:" + sPost
-//						+ "/sAddr:" + sAddr);
-//		
-//	}// end of sMemInsert(){}
+	public boolean sMemInsert(String sMemData){
+		System.out.println("[log] sMemInsert 함수 시작, sMemData : " + sMemData);
+		
+		boolean insertBool = false;
+		String sData = sMemData;
+		String[] sDataArray = sData.split("/");
+		System.out.println("sDataArray 길이 : " + sDataArray.length);
+		
+		// 데이터 분기 후 vo에 넣기
+		String sname = sDataArray[0];
+		String spw = sDataArray[1];
+		String sbirth = sDataArray[2];
+		String shp = sDataArray[3];
+		String smail = sDataArray[4];
+		String spost = sDataArray[5];
+		String saddr = sDataArray[6];
+
+		System.out.println("데이터 확인 sname:" + sname
+						+ "/spw:" + spw
+						+ "/sbirth:" + sbirth
+						+ "/shp:" + shp
+						+ "/smail:" + smail
+						+ "/spost:" + spost
+						+ "/saddr:" + saddr);
+		
+		SMemberVO smvo = new SMemberVO();
+		smvo.setSname(sname);
+		smvo.setSpw(spw);
+		smvo.setSbirth(sbirth);
+		smvo.setShp(shp);
+		smvo.setSmail(smail);
+		smvo.setSpost(spost);
+		smvo.setSaddr(saddr);
+		
+		// dao연결
+		SMemberDAO smdao = new SMemberDAOImpl();
+		insertBool = smdao.sMemInsert(smvo);
+		System.out.println("insertBool : " + insertBool);
+		
+		return insertBool;
+	}// end of sMemInsert(){}
 	
 	// 4. 전체회원 조회
 	public ArrayList<SMemberVO> sMemSelect(){
@@ -91,16 +117,24 @@ public class SMemberScr {
 		if(strNum.equals("1")){
 			System.out.println("if문 1.회원등록");
 			
-	//		// 회원정보 입력
-	//		System.out.println("회원정보를 입력하세요.\n"
-	//				+ "(이름/비밀번호 4자리 숫자/생년월일 8자리/전화번호/이메일/우편번호/주소)\n"
-	//				+ ">>> ");
-	//		
-	//		String sMemData = scan.nextLine();
-	//		System.out.println("입력데이터 확인 sMemData : " + sMemData);
-	//		
-	//		// insert 함수 호출
-	//		smsc.sMemInsert(sMemData);
+			// 회원정보 입력
+			System.out.println("회원정보를 입력하세요.\n"
+					+ "(이름/비밀번호 4자리 숫자/생년월일 8자리/전화번호/이메일/우편번호/주소)\n"
+					+ ">>> ");
+			
+			String sMemData = scan.nextLine();
+			System.out.println("입력데이터 확인 sMemData : " + sMemData);
+			
+			// insert 함수 호출
+			boolean insertBool = false;
+			insertBool = smsc.sMemInsert(sMemData);
+			System.out.println("insertBool 1 : " + insertBool);
+			
+			if(insertBool){
+				System.out.println("회원등록이 완료되었습니다.");
+			}else{
+				System.out.println("회원등록에 실패하였습니다. 다시 시도하시거나 관리자에게 문의하십시오.");
+			}// end of if
 			
 		}// end of if(회원등록)
 		
@@ -132,10 +166,10 @@ public class SMemberScr {
 				sinsertdate = svo.getSinsertdate();
 				supdatedate = svo.getSupdatedate();
 				sdeleteyn = svo.getSdeleteyn();
-				System.out.println(i + ". " + sno + "/" + sname + "/" + spw + "/"
+				System.out.println(i+1 + ". " + sno + "/" + sname + "/" + spw + "/"
 								+ sbirth + "/" + shp + "/" + smail + "/" + spost + "/"
 								+ saddr + "/" + sinsertdate + "/" + supdatedate + "/"
-								+ sdeleteyn + "\n");
+								+ sdeleteyn);
 			}// end of for
 			
 		}// end of if(전체회원 조회)
