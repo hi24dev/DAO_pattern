@@ -10,7 +10,8 @@ public interface SMemberDAO {
 	public boolean sMemInsert(SMemberVO smvo);
 	// 2. 비밀번호 수정
 	public boolean sMemUpdate(SMemberVO smvo);
-	
+	// 3. 회원탈퇴
+	public boolean sMemDelete(SMemberVO smvo);
 	// 4. 전체조회
 	public ArrayList<SMemberVO> sMemSelect();
 

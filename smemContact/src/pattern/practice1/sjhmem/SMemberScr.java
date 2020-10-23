@@ -82,6 +82,21 @@ public class SMemberScr {
 		return updateBool;
 	}// end of sMemUpdate
 	
+	// 3. 회원탈퇴(delete)
+	public boolean sMemDelete(String sno){
+		System.out.println("[log] SMemberScr.sMemDelete() >>> sno : " + sno);
+		boolean deleteBool = false;
+		
+		SMemberVO smvo = new SMemberVO();
+		smvo.setSno(sno);
+		
+		SMemberDAO smdao = new SMemberDAOImpl();
+		deleteBool = smdao.sMemDelete(smvo);
+		
+		System.out.println("sMemDelete() >>> deleteBool : " + deleteBool);
+		return deleteBool;
+	}
+	
 	// 4. 전체회원 조회
 	public ArrayList<SMemberVO> sMemSelect(){
 		System.out.println("[log] SMemberScr 클래스 >>> sMemSelect() 전체회원 조회 함수 호출");
@@ -122,7 +137,7 @@ public class SMemberScr {
 		System.out.println("실행할 기능의 번호를 입력해주세요.\n"
 				+ "1.회원 등록\n"
 				+ "2.비밀번호 수정\n"
-				+ "3.회원 삭제\n"
+				+ "3.회원 탈퇴\n"
 				+ "4.전체 회원 조회\n"
 				+ "5.회원번호 검색\n"
 				+ "6.이름 검색(like검색)\n"
@@ -160,10 +175,10 @@ public class SMemberScr {
 		if(strNum.equals("2")){
 			System.out.println("if문 2.비밀번호 수정");
 			
-			System.out.println("회원번호를 입력해주세요.");
+			System.out.println("회원번호를 입력해주세요. >>> ");
 			sno = scan.nextLine();
 			
-			System.out.println("수정할 비밀번호를 입력해주세요.");
+			System.out.println("수정할 비밀번호를 입력해주세요. >>> ");
 			spw = scan.nextLine();
 			
 			System.out.println("입력데이터 확인 >>> sno,spw : " + sno + "," + spw);
@@ -178,6 +193,22 @@ public class SMemberScr {
 			
 		}// end of if(update)
 		
+		// 3. 회원 삭제(delete)
+		if(strNum.equals("3")){
+			System.out.println("if문 3.회원탈퇴");
+
+			System.out.println("탈퇴할 회원의 회원번호를 입력해주세요. >>> ");
+			sno = scan.nextLine();
+			
+			boolean deleteBool = smsc.sMemDelete(sno);
+			
+			if(deleteBool){
+				System.out.println("회원탈퇴가 완료되었습니다.");
+			}else{
+				System.out.println("회원탈퇴에 실패하였습니다. 다시 시도하거나 관리자에게 문의하십니오.");
+			}// end of if else
+		
+		}// end of if(delete)
 		// 4. 전체회원 조회(select)
 		if(strNum.equals("4")){
 			System.out.println("if문 4.전체회원 조회");

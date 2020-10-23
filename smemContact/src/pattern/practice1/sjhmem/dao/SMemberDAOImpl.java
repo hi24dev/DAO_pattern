@@ -13,6 +13,7 @@ import pattern.practice1.sjhmem.vo.SMemberVO;
 public class SMemberDAOImpl implements SMemberDAO {
 
 	// 1.회원등록
+	@Override
 	public boolean sMemInsert(SMemberVO smvo){
 		System.out.println("[log] SMemberDAOImpl.sMemInsert 함수 호출!\n"
 								+ "데이터 확인 >>> smvo.getSname : " + smvo.getSname());
@@ -39,7 +40,7 @@ public class SMemberDAOImpl implements SMemberDAO {
 			pstmt.setString(6, smvo.getSmail());
 			pstmt.setString(7, smvo.getSpost());
 			pstmt.setString(8, smvo.getSaddr());
-			pstmt.setString(9, "Y");
+			pstmt.setString(9, "N");
 			
 			nCntInsert = pstmt.executeUpdate();
 			System.out.println("업데이트 갯수 nCntInsert : " + nCntInsert);
@@ -70,6 +71,7 @@ public class SMemberDAOImpl implements SMemberDAO {
 	}// end of sMemInsert(회원등록)
 	
 	// 2.비밀번호 수정(update)
+	@Override
 	public boolean sMemUpdate(SMemberVO smvo){
 		System.out.println("[log] daoimpl 비번수정 sMemUpdate() 시작! >>>"
 										+ " 데이터확인 smvo.getSno : " + smvo.getSno() 
@@ -104,6 +106,42 @@ public class SMemberDAOImpl implements SMemberDAO {
 		}// end of if
 		return updateBool;
 	}// end of sMemUpdate
+	
+	// 3.회원탈퇴
+	@Override
+	public boolean sMemDelete(SMemberVO smvo){
+		System.out.println("[log] daoimpl 회원탈퇴 함수 호출 >>> smvo.getSno : " + smvo.getSno());
+		boolean deleteBool = false;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int nCntDelete = 0;
+		
+		try{
+			con = SjhConnProperty.getConnection();
+			pstmt = con.prepareStatement(SjhSqlQueryMap.getDeleteQuery());
+			
+			pstmt.setString(1, "Y");
+			pstmt.setString(2, smvo.getSno());
+			nCntDelete = pstmt.executeUpdate();
+			System.out.println("nCntDelete : " + nCntDelete);
+			
+			SjhConnProperty.conClose(con, pstmt);
+			System.out.println("[log] 회원탈퇴 db연결 종료");
+		}catch(Exception e){
+			System.out.println("delete 에러가 >>> " + e.getMessage());
+		}finally{
+			SjhConnProperty.conClose(con, pstmt);
+			System.out.println("[log] 회원탈퇴 db연결 종료");
+		}// end of finally
+		
+		if(nCntDelete>0){
+			deleteBool = true;
+		}else{
+			System.out.println("delete 실패");
+		}// end of if else
+		return deleteBool;
+	}// end of sMemDelete()
 	
 	// 4.전체조회
 	@Override

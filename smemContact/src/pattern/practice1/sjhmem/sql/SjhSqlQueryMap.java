@@ -91,5 +91,19 @@ public class SjhSqlQueryMap {
 	}// end of getUpdateQuery()
 	
 	// 회원 삭제(delete)
+	public static String getDeleteQuery(){
+		System.out.println("[log] getDeleteQuery() 함수 시작");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("UPDATE SMEMBER_CONTACT  S			\n");
+		sb.append("SET  	 S.SDELETEYN = ?			\n");
+		sb.append("    		,S.SUPDATEDATE = SYSDATE	\n");
+		sb.append("WHERE 	 S.SNO = ?					\n");
+		sb.append("AND   	 S.SDELETEYN = 'N'			  ");
+		
+		String deleteStr = sb.toString();
+		System.out.println("[log] getDeleteQuery() 함수 끝");
+		return deleteStr;
+	}
 
 }// end of SjhSqlQueryMap
