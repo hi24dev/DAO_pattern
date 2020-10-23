@@ -21,7 +21,7 @@ public class SMemberScr {
 //	String supdatedate = "";
 //	String sdeleteyn = "";
 	
-	// 1. insert 함수
+	// 1. 회원등록(insert)
 	public boolean sMemInsert(String sMemData){
 		System.out.println("[log] sMemInsert 함수 시작, sMemData : " + sMemData);
 		
@@ -63,6 +63,24 @@ public class SMemberScr {
 		
 		return insertBool;
 	}// end of sMemInsert(){}
+	
+	// 2. 비밀번호 수정(update)
+	public boolean sMemUpdate(String sno, String spw){
+		System.out.println("[log] SMemberScr.sMemUpdate() >>>"
+											+ " 데이터확인 sno,spw : " + sno + "," + spw);
+		boolean updateBool = false;
+		
+		// vo에 담기
+		SMemberVO smvo = new SMemberVO();
+		smvo.setSno(sno);
+		smvo.setSpw(spw);
+		
+		// dao연결
+		SMemberDAO smdao = new SMemberDAOImpl();
+		updateBool = smdao.sMemUpdate(smvo);
+		System.out.println("[log] SMemberScr.sMemUpdate >>> updateBool : "  + updateBool);
+		return updateBool;
+	}// end of sMemUpdate
 	
 	// 4. 전체회원 조회
 	public ArrayList<SMemberVO> sMemSelect(){
@@ -137,6 +155,28 @@ public class SMemberScr {
 			}// end of if
 			
 		}// end of if(회원등록)
+		
+		// 2. 비밀번호 수정(update)
+		if(strNum.equals("2")){
+			System.out.println("if문 2.비밀번호 수정");
+			
+			System.out.println("회원번호를 입력해주세요.");
+			sno = scan.nextLine();
+			
+			System.out.println("수정할 비밀번호를 입력해주세요.");
+			spw = scan.nextLine();
+			
+			System.out.println("입력데이터 확인 >>> sno,spw : " + sno + "," + spw);
+			
+			boolean updateBool = smsc.sMemUpdate(sno, spw);
+			
+			if(updateBool){
+				System.out.println("비밀번호가 수정 되었습니다.");
+			}else{
+				System.out.println("비밀번호 수정에 실패하였습니다. 다시 시도하시거나 관리자에게 문의하십시오.");
+			}// end of if
+			
+		}// end of if(update)
 		
 		// 4. 전체회원 조회(select)
 		if(strNum.equals("4")){

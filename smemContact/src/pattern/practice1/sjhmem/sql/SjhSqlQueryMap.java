@@ -25,8 +25,8 @@ public class SjhSqlQueryMap {
 		sb.append(" 		,TO_CHAR(S.SINSERTDATE,'YYYY-MM-DD')	SINSERTDATE	\n");
 		sb.append(" 		,TO_CHAR(S.SUPDATEDATE,'YYYY-MM-DD')	SUPDATEDATE	\n");
 		sb.append(" 		,S.SDELETEYN	SDELETEYN	\n");
-		sb.append(" FROM  SMEMBER_CONTACT   S	\n");
-		sb.append(" WHERE S.SDELETEYN = 'Y'		\n");
+		sb.append(" FROM  SMEMBER_CONTACT   S		\n");
+		sb.append(" WHERE S.SDELETEYN = 'N'			\n");
 		sb.append(" ORDER BY 1");
 		
 		String selectStr = sb.toString();
@@ -75,6 +75,20 @@ public class SjhSqlQueryMap {
 	}// end of getInsertQuery()
 	
 	// 비밀번호 수정(update)
+	public static String getUpdateQuery(){
+		System.out.println("[log] getUpdateQuery() 함수 시작");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("UPDATE 	 SMEMBER_CONTACT  S		\n");
+		sb.append("SET  	 S.SPW = ?				\n");
+		sb.append("    		,S.SUPDATEDATE = SYSDATE	\n");
+		sb.append("WHERE 	 S.SNO = ?				\n");
+		sb.append("AND   	 S.SDELETEYN = 'N'		\n");
+		
+		String updateStr = sb.toString();		
+		System.out.println("[log] getUpdateQuery() 함수 끝");
+		return updateStr;
+	}// end of getUpdateQuery()
 	
 	// 회원 삭제(delete)
 

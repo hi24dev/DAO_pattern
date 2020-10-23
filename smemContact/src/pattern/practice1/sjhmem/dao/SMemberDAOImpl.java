@@ -52,7 +52,7 @@ public class SMemberDAOImpl implements SMemberDAO {
 			SjhConnProperty.conClose(con, pstmt);
 			System.out.println("[log] db연결 종료");
 		} catch (Exception e) {
-			System.out.println("에러가 111 >>> " + e.getMessage());
+			System.out.println("insert 에러가 >>> " + e.getMessage());
 		} finally{
 			SjhConnProperty.conClose(con, pstmt);
 			System.out.println("[log] db연결 종료");
@@ -68,6 +68,42 @@ public class SMemberDAOImpl implements SMemberDAO {
 		
 		return insertBool;
 	}// end of sMemInsert(회원등록)
+	
+	// 2.비밀번호 수정(update)
+	public boolean sMemUpdate(SMemberVO smvo){
+		System.out.println("[log] daoimpl 비번수정 sMemUpdate() 시작! >>>"
+										+ " 데이터확인 smvo.getSno : " + smvo.getSno() 
+										+ ", smvo.getSpw : "+ smvo.getSpw());
+		boolean updateBool = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int updateInt = 0;
+		
+		try {
+			con = SjhConnProperty.getConnection();
+			pstmt = con.prepareStatement(SjhSqlQueryMap.getUpdateQuery());
+			
+			pstmt.setString(1, smvo.getSpw());
+			pstmt.setString(2, smvo.getSno());
+			updateInt = pstmt.executeUpdate();
+			System.out.println("update 성공 갯수 updateInt : " + updateInt);
+			
+			SjhConnProperty.conClose(con, pstmt);
+			System.out.println("[log] update db연결 종료");
+		} catch (Exception e){
+			System.out.println("update 에러가 >>> " + e.getMessage());
+		} finally{
+			SjhConnProperty.conClose(con, pstmt);
+			System.out.println("[log] update db연결 종료");
+		}// end of try catch
+		
+		if(updateInt>0){
+			updateBool = true;
+		}else{
+			System.out.println("update 실패");
+		}// end of if
+		return updateBool;
+	}// end of sMemUpdate
 	
 	// 4.전체조회
 	@Override
