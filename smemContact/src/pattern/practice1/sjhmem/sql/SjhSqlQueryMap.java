@@ -10,7 +10,7 @@ public class SjhSqlQueryMap {
 	
 	// 전체 회원 조회(select)
 	public static String getSelectQuery(){
-		System.out.println("[log] pattern.practice1.sjhmem.sql.SjhSqlQueryMap 클래스 >>> getSelectQuery() 함수 시작");
+//		System.out.println("[log] 쿼리맵 >>> getSelectQuery() 함수 시작");
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(" SELECT							\n");
@@ -30,13 +30,13 @@ public class SjhSqlQueryMap {
 		sb.append(" ORDER BY 1");
 		
 		String selectStr = sb.toString();
-		System.out.println("[log] getSelectQuery() 함수 끝");
+//		System.out.println("[log] getSelectQuery() 함수 끝");
 		return selectStr;
 	}// end of getSelectQuery()
 	
 	// 회원번호 검색(search)
 	public static String getSearchQuery(){
-		System.out.println("[log] getSearchQuery() 함수 시작");
+//		System.out.println("[log] 쿼리맵 >>> getSearchQuery() 함수 시작");
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(" SELECT							\n");
@@ -56,13 +56,13 @@ public class SjhSqlQueryMap {
 		sb.append(" AND	  S.SDELETEYN = 'N'			  ");		
 		
 		String searchStr = sb.toString();
-		System.out.println("[log] getSearchQuery() 함수 끝");
+//		System.out.println("[log] getSearchQuery() 함수 끝");
 		return searchStr;
 	}// end of getSearchQuery()
 	
 	// 이름 검색(likeSearch)
 	public static String getLikeSearchQuery(){
-		System.out.println("[log] getLikeSearchQuery() 함수 시작");
+//		System.out.println("[log] getLikeSearchQuery() 함수 시작");
 		
 		String likeSearchStr = "";
 		
@@ -85,13 +85,13 @@ public class SjhSqlQueryMap {
 	
 		likeSearchStr = sb.toString();
 		
-		System.out.println("[log] getLikeSearchQuery() 함수 끝");
+//		System.out.println("[log] getLikeSearchQuery() 함수 끝");
 		return likeSearchStr;
 	}// end of getLikeSearchQuery()
 	
 	// 회원등록(insert)
 	public static String getInsertQuery(){
-		System.out.println("[log] getInsertQuery() 함수 시작");
+//		System.out.println("[log] getInsertQuery() 함수 시작");
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("INSERT INTO SMEMBER_CONTACT (		\n");
@@ -121,13 +121,13 @@ public class SjhSqlQueryMap {
 		sb.append("							        )	\n");
 		
 		String insertStr = sb.toString();
-		System.out.println("[log] getInsertQuery() 함수 끝");
+//		System.out.println("[log] getInsertQuery() 함수 끝");
 		return insertStr;
 	}// end of getInsertQuery()
 	
 	// 비밀번호 수정(update)
 	public static String getUpdateQuery(){
-		System.out.println("[log] getUpdateQuery() 함수 시작");
+//		System.out.println("[log] getUpdateQuery() 함수 시작");
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("UPDATE 	 SMEMBER_CONTACT  S		\n");
@@ -137,13 +137,13 @@ public class SjhSqlQueryMap {
 		sb.append("AND   	 S.SDELETEYN = 'N'		\n");
 		
 		String updateStr = sb.toString();		
-		System.out.println("[log] getUpdateQuery() 함수 끝");
+//		System.out.println("[log] getUpdateQuery() 함수 끝");
 		return updateStr;
 	}// end of getUpdateQuery()
 	
 	// 회원 삭제(delete)
 	public static String getDeleteQuery(){
-		System.out.println("[log] getDeleteQuery() 함수 시작");
+//		System.out.println("[log] getDeleteQuery() 함수 시작");
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("UPDATE SMEMBER_CONTACT  S			\n");
@@ -153,7 +153,7 @@ public class SjhSqlQueryMap {
 		sb.append("AND   	 S.SDELETEYN = 'N'			  ");
 		
 		String deleteStr = sb.toString();
-		System.out.println("[log] getDeleteQuery() 함수 끝");
+//		System.out.println("[log] getDeleteQuery() 함수 끝");
 		return deleteStr;
 	}
 

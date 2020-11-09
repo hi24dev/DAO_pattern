@@ -17,8 +17,8 @@ public abstract class SjhConnProperty {
 	
 	// sql연결 함수 getConnection()
 	public static Connection getConnection() throws Exception{
-		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnProperty클래스"
-							+ " >>> getConnection() 함수 시작 ");
+//		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnProperty클래스"
+//							+ " >>> getConnection() 함수 시작 ");
 		
 		Connection con = null;
 		Class.forName(ORACLE11G_JDBCDRIVER);
@@ -26,7 +26,7 @@ public abstract class SjhConnProperty {
 										 ,ORACLE11G_USER
 										 ,ORACLE11G_PASS);
 		
-		System.out.println("[log] getConnection() 함수 끝 ");
+//		System.out.println("[log] getConnection() 함수 끝 ");
 		return con;
 	}// end of getConnection()
 	
@@ -34,8 +34,8 @@ public abstract class SjhConnProperty {
 	public static void conClose( Connection con
 								,PreparedStatement pstmt
 								,ResultSet rsRs){
-		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnProperty클래스"
-				+ " >>> conClose(con,pstmt,rsRs) 함수 시작");
+//		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnProperty클래스"
+//				+ " >>> conClose(con,pstmt,rsRs) 함수 시작");
 		
 		try{
 			if(rsRs != null) try { rsRs.close(); rsRs = null; } catch (Exception ex) {}
@@ -44,14 +44,14 @@ public abstract class SjhConnProperty {
 		}
 		catch (Exception e2){}// end of try catch
 		
-		System.out.println("[log] conClose(con,pstmt,rsRs) 함수 끝 ");
+//		System.out.println("[log] conClose(con,pstmt,rsRs) 함수 끝 ");
 	}// end of conClose(con,pstmt,rsRs)
 	
 	// sql끊기 conClose(con,pstmt,rsRs)
 	public static void conClose( Connection con
 								,PreparedStatement pstmt){
-		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnProperty클래스"
-				+ " >>> conClose(con,pstmt) 함수 시작");
+//		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnProperty클래스"
+//				+ " >>> conClose(con,pstmt) 함수 시작");
 		
 		try{
 			if(pstmt != null) try { pstmt.close(); pstmt = null; } catch(Exception ex) {}
@@ -59,7 +59,7 @@ public abstract class SjhConnProperty {
 		}
 		catch (Exception e2){}// end of try catch
 		
-		System.out.println("[log] conClose(con,pstmt) 함수 끝 ");
+//		System.out.println("[log] conClose(con,pstmt) 함수 끝 ");
 	}// end of conClose(con,pstmt)
 	
 }// end of abstract class SjhConnProperty{}

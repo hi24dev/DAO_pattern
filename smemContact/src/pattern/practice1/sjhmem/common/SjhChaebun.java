@@ -13,7 +13,7 @@ public abstract class SjhChaebun {
 	public static final String SMEMBER_GUBUN_S = "S";
 	
 	public static String SMemChaebun(){
-		System.out.println("[log] SjhChaebun.SMemChaebun 함수 호출!");
+//		System.out.println("[log] SjhChaebun.SMemChaebun 함수 호출!");
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -27,10 +27,8 @@ public abstract class SjhChaebun {
 			rsRs = pstmt.executeQuery();
 			
 			Date d = new Date();
-			System.out.println("d : " + d);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String date = sdf.format(d);
-			System.out.println("date : " + date);
 			String commno = "";
 					
 			boolean rsBool = false;
@@ -39,39 +37,36 @@ public abstract class SjhChaebun {
 			if(rsRs!=null){
 				while(rsBool){
 					commno = rsRs.getString("commno");
-					System.out.println("데이터확인 commno : " + commno);
+//					System.out.println("데이터확인 commno : " + commno);
 					rsBool = false;
 				}// end of while
 			}// end of if
 			
 			// 01 11
 			int commLen = commno.length();
-			System.out.println("commLen : " + commLen);
 			
 			for(commno.length();commLen<2;commLen++){
 				commno = 0 + commno;
 			}// end of for
 			
-			System.out.println("데이터확인1 commno : " + commno);
-			
 			smemNo = SMEMBER_GUBUN_S + date + commno;
-			System.out.println("smemNo : " + smemNo);
+//			System.out.println("데이터확인 smemNo : " + smemNo);
 			
 			// db연결 종료
 			SjhConnProperty.conClose(con, pstmt, rsRs);
-			System.out.println("[log] 채번클래스 db연결 종료");
+//			System.out.println("[log] 채번클래스 db연결 종료");
 		} catch (Exception e) {
 			System.out.println("db연결 에러가 >>> " + e.getMessage());
 		} finally {
 			SjhConnProperty.conClose(con, pstmt, rsRs);
-			System.out.println("[log] 채번클래스 db연결 종료");
+//			System.out.println("[log] 채번클래스 db연결 종료");
 		}// end of try catch
 		
 		return smemNo;
 	}// end of SMemChaebun
 	
 	public static void main(String[] args) {
-		System.out.println("[log] SjhChaebun.main 함수 시작!");
+		System.out.println("[log] SjhChaebun.main 함수 test 시작!");
 
 		// test
 		String sss = SjhChaebun.SMemChaebun();

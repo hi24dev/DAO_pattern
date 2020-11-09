@@ -11,16 +11,14 @@ import pattern.practice1.sjhmem.vo.SMemberVO;
 
 public class SMemberScr {
 
-
-	
 	// 1. 회원등록(insert)
 	public boolean sMemInsert(String sMemData){
-		System.out.println("[log] sMemInsert 함수 시작, sMemData : " + sMemData);
+//		System.out.println("[log] sMemInsert 함수 시작, sMemData : " + sMemData);
 		
 		boolean insertBool = false;
 		String sData = sMemData;
 		String[] sDataArray = sData.split("/");
-		System.out.println("sDataArray 길이 : " + sDataArray.length);
+//		System.out.println("sDataArray 길이 : " + sDataArray.length);
 		
 		// 데이터 분기 후 vo에 넣기
 		String sname = sDataArray[0];
@@ -31,13 +29,13 @@ public class SMemberScr {
 		String spost = sDataArray[5];
 		String saddr = sDataArray[6];
 
-		System.out.println("데이터 확인 sname:" + sname
-						+ "/spw:" + spw
-						+ "/sbirth:" + sbirth
-						+ "/shp:" + shp
-						+ "/smail:" + smail
-						+ "/spost:" + spost
-						+ "/saddr:" + saddr);
+//		System.out.println("데이터 확인 sname:" + sname
+//						+ "/spw:" + spw
+//						+ "/sbirth:" + sbirth
+//						+ "/shp:" + shp
+//						+ "/smail:" + smail
+//						+ "/spost:" + spost
+//						+ "/saddr:" + saddr);
 		
 		SMemberVO smvo = new SMemberVO();
 		smvo.setSname(sname);
@@ -51,15 +49,15 @@ public class SMemberScr {
 		// dao연결
 		SMemberDAO smdao = new SMemberDAOImpl();
 		insertBool = smdao.sMemInsert(smvo);
-		System.out.println("insertBool : " + insertBool);
+//		System.out.println("insertBool : " + insertBool);
 		
 		return insertBool;
 	}// end of sMemInsert(){}
 	
 	// 2. 비밀번호 수정(update)
 	public boolean sMemUpdate(String sno, String spw){
-		System.out.println("[log] SMemberScr.sMemUpdate() >>>"
-											+ " 데이터확인 sno,spw : " + sno + "," + spw);
+//		System.out.println("[log] SMemberScr.sMemUpdate() >>>"
+//											+ " 데이터확인 sno,spw : " + sno + "," + spw);
 		boolean updateBool = false;
 		
 		// vo에 담기
@@ -70,13 +68,13 @@ public class SMemberScr {
 		// dao연결
 		SMemberDAO smdao = new SMemberDAOImpl();
 		updateBool = smdao.sMemUpdate(smvo);
-		System.out.println("[log] SMemberScr.sMemUpdate >>> updateBool : "  + updateBool);
+//		System.out.println("[log] SMemberScr.sMemUpdate >>> updateBool : "  + updateBool);
 		return updateBool;
 	}// end of sMemUpdate
 	
 	// 3. 회원탈퇴(delete)
 	public boolean sMemDelete(String sno){
-		System.out.println("[log] SMemberScr.sMemDelete() >>> sno : " + sno);
+//		System.out.println("[log] SMemberScr.sMemDelete() >>> sno : " + sno);
 		boolean deleteBool = false;
 		
 		SMemberVO smvo = new SMemberVO();
@@ -85,44 +83,44 @@ public class SMemberScr {
 		SMemberDAO smdao = new SMemberDAOImpl();
 		deleteBool = smdao.sMemDelete(smvo);
 		
-		System.out.println("sMemDelete() >>> deleteBool : " + deleteBool);
+//		System.out.println("sMemDelete() >>> deleteBool : " + deleteBool);
 		return deleteBool;
 	}
 	
 	// 4. 전체회원 조회(select)
 	public ArrayList<SMemberVO> sMemSelect(){
-		System.out.println("[log] SMemberScr 클래스 >>> sMemSelect() 전체회원 조회 함수 호출");
+//		System.out.println("[log] SMemberScr 클래스 >>> sMemSelect() 전체회원 조회 함수 호출");
 		
 		ArrayList<SMemberVO> arraySmemSelect = null;
 		
 		SMemberDAO smdao = new SMemberDAOImpl();
 		
 		arraySmemSelect = smdao.sMemSelect();
-		System.out.println("arraySmemSelect.size() : " + arraySmemSelect.size());
+//		System.out.println("arraySmemSelect.size() : " + arraySmemSelect.size());
 		
 		return arraySmemSelect;
 	}// end of sMemSelect(){}
 	
 	// 5. 회원번호로 조회(search)
 	public ArrayList<SMemberVO> sMemSearch(String sno){
-		System.out.println("[log] SMemberScr.sMemSearch() 함수 호출"
-												+ "\n데이터확인 sno : " + sno);
+//		System.out.println("[log] SMemberScr.sMemSearch() 함수 호출"
+//												+ "\n데이터확인 sno : " + sno);
 		ArrayList<SMemberVO> arraySmemSearch = null;
 		
 		SMemberVO smvo = new SMemberVO();
 		smvo.setSno(sno);
 		SMemberDAO smdao = new SMemberDAOImpl();
 		arraySmemSearch = smdao.sMemSearch(smvo);
-		System.out.println("[log] SMemberScr >>>\n"
-						+ "데이터확인 arraySmemSearch.size() : " + arraySmemSearch.size());
+//		System.out.println("[log] SMemberScr >>>\n"
+//						+ "데이터확인 arraySmemSearch.size() : " + arraySmemSearch.size());
 		
 		return arraySmemSearch;
 	}// end of sMemSearch
 	
 	// 6. 이름으로 검색(like)
 	public ArrayList<SMemberVO> sMemLikeSearch(String sname){
-		System.out.println("[log] SMemberScr.sMemLikeSearch 함수 시작! >>>\n"
-													+ "데이터확인 sname : " + sname);
+//		System.out.println("[log] SMemberScr.sMemLikeSearch 함수 시작! >>>\n"
+//													+ "데이터확인 sname : " + sname);
 		SMemberDAO smdao = new SMemberDAOImpl();
 		ArrayList<SMemberVO> arraySmemLikeSearch = null;
 		SMemberVO smvo = new SMemberVO();
@@ -135,8 +133,8 @@ public class SMemberScr {
 	
 	// 출력 함수(printOut)
 	public void sMemPrintOut(ArrayList<SMemberVO> aListMember){
-		System.out.println("SMemberScr 프린트 함수 호출!\n"
-						+ "데이터확인 aListMember.size() : " + aListMember.size());
+//		System.out.println("SMemberScr 프린트 함수 호출!\n"
+//						+ "데이터확인 aListMember.size() : " + aListMember.size());
 		String sno = "";
 		String sname = "";
 		String spw = "";
@@ -178,20 +176,12 @@ public class SMemberScr {
 	
 	// main 함수 시작
 	public static void main(String[] args) {
-		System.out.println("[log] SMemberScr 클래스 >>> main 함수 시작");
+//		System.out.println("[log] SMemberScr 클래스 >>> main 함수 시작");
 		
 		// 변수
 		String sno = "";
 		String sname = "";
 		String spw = "";
-		String sbirth = "";
-		String shp = "";
-		String smail = "";
-		String spost = "";
-		String saddr = "";
-		String sinsertdate = "";
-		String supdatedate = "";
-		String sdeleteyn = "";
 		
 		// 클래스 인스턴스
 		SMemberScr smsc = new SMemberScr();
@@ -208,11 +198,10 @@ public class SMemberScr {
 				+ ">>> ");
 		
 		String strNum = scan.nextLine();
-		System.out.println("입력데이터 확인 strNum : " + strNum);
 		
 		// 1.회원등록(insert)
 		if(strNum.equals("1")){
-			System.out.println("if문 1.회원등록");
+//			System.out.println("if문 1.회원등록");
 			
 			// 회원정보 입력
 			System.out.println("회원정보를 입력하세요.\n"
@@ -220,12 +209,10 @@ public class SMemberScr {
 					+ ">>> ");
 			
 			String sMemData = scan.nextLine();
-			System.out.println("입력데이터 확인 sMemData : " + sMemData);
 			
 			// insert 함수 호출
 			boolean insertBool = false;
 			insertBool = smsc.sMemInsert(sMemData);
-			System.out.println("insertBool 1 : " + insertBool);
 			
 			if(insertBool){
 				System.out.println("회원등록이 완료되었습니다.");
@@ -237,7 +224,7 @@ public class SMemberScr {
 		
 		// 2. 비밀번호 수정(update)
 		if(strNum.equals("2")){
-			System.out.println("if문 2.비밀번호 수정");
+//			System.out.println("if문 2.비밀번호 수정");
 			
 			System.out.println("회원번호를 입력해주세요. >>> ");
 			sno = scan.nextLine();
@@ -245,7 +232,7 @@ public class SMemberScr {
 			System.out.println("수정할 비밀번호를 입력해주세요. >>> ");
 			spw = scan.nextLine();
 			
-			System.out.println("입력데이터 확인 >>> sno,spw : " + sno + "," + spw);
+//			System.out.println("입력데이터 확인 >>> sno,spw : " + sno + "," + spw);
 			
 			boolean updateBool = smsc.sMemUpdate(sno, spw);
 			
@@ -259,7 +246,7 @@ public class SMemberScr {
 		
 		// 3. 회원 삭제(delete)
 		if(strNum.equals("3")){
-			System.out.println("if문 3.회원탈퇴");
+//			System.out.println("if문 3.회원탈퇴");
 
 			System.out.println("탈퇴할 회원의 회원번호를 입력해주세요. >>> ");
 			sno = scan.nextLine();
@@ -276,7 +263,7 @@ public class SMemberScr {
 		
 		// 4. 전체회원 조회(select)
 		if(strNum.equals("4")){
-			System.out.println("if문 4.전체회원 조회");
+//			System.out.println("if문 4.전체회원 조회");
 			
 			ArrayList<SMemberVO> arraySmemSelect = null;
 			SMemberVO svo = null;
@@ -291,7 +278,7 @@ public class SMemberScr {
 		
 		// 5.회원번호로 검색(search)
 		if(strNum.equals("5")){
-			System.out.println("if문 5.회원번호로 검색");
+//			System.out.println("if문 5.회원번호로 검색");
 			
 			System.out.println("검색할 회원번호를 입력해주세요. >>> ");
 			sno = scan.nextLine();
@@ -300,12 +287,11 @@ public class SMemberScr {
 			
 			// 데이터 출력
 			smsc.sMemPrintOut(arraySmemSearch);
-					
 		}// end of if(5)
 		
 		// 6.이름으로 검색(like)
 		if(strNum.equals("6")){
-			System.out.println("if문 6.이름으로 검색");
+//			System.out.println("if문 6.이름으로 검색");
 			
 			System.out.println("검색할 회원의 이름을 입력해주세요. >>> ");
 			sname = scan.nextLine();
@@ -313,10 +299,9 @@ public class SMemberScr {
 			
 			// 데이터출력
 			smsc.sMemPrintOut(arraySmemLikeSearch);
-			
 		}// end of if(6)
 		
-		System.out.println("[log] SMemberScr 클래스 >>> main 함수 끝");
+//		System.out.println("[log] SMemberScr 클래스 >>> main 함수 끝");
 	}// end of main
 
 }// end of class SMemberSCr
