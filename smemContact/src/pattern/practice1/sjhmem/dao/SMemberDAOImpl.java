@@ -199,4 +199,119 @@ public class SMemberDAOImpl implements SMemberDAO {
 		return alist;
 	}// end of sMemSelect()
 
+	// 5.회원번호조회
+	@Override
+	public ArrayList<SMemberVO> sMemSearch(SMemberVO _smvo){
+		System.out.println("[log] 다오임플 sMemSearch 함수 호출!\n"
+										+ "데이터 확인 _smvo.getSno() : " + _smvo.getSno());
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rsRs = null;
+		ArrayList<SMemberVO> arraySmemSearch = null;
+		SMemberVO smvo = null;
+		
+		try {
+			//db연결
+			con = SjhConnProperty.getConnection();
+			pstmt = con.prepareStatement(SjhSqlQueryMap.getSearchQuery());
+			pstmt.setString(1, _smvo.getSno());
+			rsRs = pstmt.executeQuery();
+						
+			if(rsRs!=null){
+				arraySmemSearch = new ArrayList<SMemberVO>();
+				
+				while(rsRs.next()){
+					smvo = new SMemberVO();
+					smvo.setSno(rsRs.getString("sno"));
+					smvo.setSname(rsRs.getString("sname"));
+					smvo.setSpw(rsRs.getString("spw"));
+					smvo.setSbirth(rsRs.getString("sbirth"));
+					smvo.setShp(rsRs.getString("shp"));
+					smvo.setSmail(rsRs.getString("smail"));
+					smvo.setSpost(rsRs.getString("spost"));
+					smvo.setSaddr(rsRs.getString("saddr"));
+					smvo.setSinsertdate(rsRs.getString("sinsertdate"));
+					smvo.setSupdatedate(rsRs.getString("supdatedate"));
+					smvo.setSdeleteyn(rsRs.getString("sdeleteyn"));
+					
+					arraySmemSearch.add(smvo);
+				}// end of while
+			}else{
+				System.out.println("[log] rsRs가 널임");
+			}// end of if-esle(널체크)
+			
+			//db연결 종료
+			SjhConnProperty.conClose(con, pstmt, rsRs);
+			System.out.println("[log] 다오임플 db연결 종료");
+		} catch (Exception e) {
+			System.out.println("[log] 다오임플 에러가 >>> " + e.getMessage());
+		} finally {
+			//db연결 종료
+			SjhConnProperty.conClose(con, pstmt, rsRs);
+			System.out.println("[log] 다오임플 db연결 종료");
+		}// end of try catch finally
+		
+		System.out.println("[log] 다오임플 search 함수 종료 >>>\n"
+							+ "데이터확인 arraySmemSearch.size() : " + arraySmemSearch.size());
+		return arraySmemSearch;
+	}// end of sMemSearch
+
+	// 6.이름으로조회
+	@Override
+	public ArrayList<SMemberVO> sMemLikeSearch(SMemberVO _smvo){
+		System.out.println("[log] 다오임플 sMemLikeSearch 함수 호출! >>> \n"
+									+ "데이터확인 _smvo.getSname() : " + _smvo.getSname());
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rsRs = null;
+		SMemberVO smvo = null;
+		ArrayList<SMemberVO> arraySmemLikeSearch = null;
+		
+		try{
+			// db연결
+			con = SjhConnProperty.getConnection();
+			pstmt = con.prepareStatement(SjhSqlQueryMap.getLikeSearchQuery());
+			pstmt.setString(1, _smvo.getSname());
+			rsRs = pstmt.executeQuery();
+			
+			// rsRs 널체크
+			if(rsRs!=null){
+				arraySmemLikeSearch = new ArrayList<SMemberVO>();
+				
+				while(rsRs.next()){
+					smvo = new SMemberVO();
+					smvo.setSno(rsRs.getString("sno"));
+					smvo.setSname(rsRs.getString("sname"));
+					smvo.setSpw(rsRs.getString("spw"));
+					smvo.setSbirth(rsRs.getString("sbirth"));
+					smvo.setShp(rsRs.getString("shp"));
+					smvo.setSmail(rsRs.getString("smail"));
+					smvo.setSpost(rsRs.getString("spost"));
+					smvo.setSaddr(rsRs.getString("saddr"));
+					smvo.setSinsertdate(rsRs.getString("sinsertdate"));
+					smvo.setSupdatedate(rsRs.getString("supdatedate"));
+					smvo.setSdeleteyn(rsRs.getString("sdeleteyn"));
+					
+					arraySmemLikeSearch.add(smvo);
+				}// end of while
+			}else{
+				System.out.println("rsRs가 널임");
+			}// end of if-else(널체크)
+			
+			// db연결 종료
+			SjhConnProperty.conClose(con, pstmt, rsRs);
+			System.out.println("[log] 다오임플 db연결 종료");
+		}catch(Exception e){
+			System.out.println("[log] 다오임플 db연결 에러가 >>> " + e.getMessage());
+		}finally{
+			// db연결 종료
+			SjhConnProperty.conClose(con, pstmt, rsRs);
+			System.out.println("[log] 다오임플 db연결 종료");
+		}// end of try catch finally
+		
+		System.out.println("[log] 다오임플 likeSearch 종료 >>> \n"
+							+ "데이터확인 arraySmemLikeSearch.size() : " + arraySmemLikeSearch.size());
+		return arraySmemLikeSearch;
+	}// end of sMemLikeSearch()
+
 }// end of SMemberDAOImpl

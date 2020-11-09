@@ -3,23 +3,15 @@ package pattern.practice1.sjhmem;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 import pattern.practice1.sjhmem.dao.SMemberDAO;
 import pattern.practice1.sjhmem.dao.SMemberDAOImpl;
 import pattern.practice1.sjhmem.vo.SMemberVO;
 
 public class SMemberScr {
 
-//	String sno = "";
-//	String sname = "";
-//	String spw = "";
-//	String sbirth = "";
-//	String shp = "";
-//	String smail = "";
-//	String spost = "";
-//	String saddr = "";
-//	String sinsertdate = "";
-//	String supdatedate = "";
-//	String sdeleteyn = "";
+
 	
 	// 1. 회원등록(insert)
 	public boolean sMemInsert(String sMemData){
@@ -97,7 +89,7 @@ public class SMemberScr {
 		return deleteBool;
 	}
 	
-	// 4. 전체회원 조회
+	// 4. 전체회원 조회(select)
 	public ArrayList<SMemberVO> sMemSelect(){
 		System.out.println("[log] SMemberScr 클래스 >>> sMemSelect() 전체회원 조회 함수 호출");
 		
@@ -111,6 +103,78 @@ public class SMemberScr {
 		return arraySmemSelect;
 	}// end of sMemSelect(){}
 	
+	// 5. 회원번호로 조회(search)
+	public ArrayList<SMemberVO> sMemSearch(String sno){
+		System.out.println("[log] SMemberScr.sMemSearch() 함수 호출"
+												+ "\n데이터확인 sno : " + sno);
+		ArrayList<SMemberVO> arraySmemSearch = null;
+		
+		SMemberVO smvo = new SMemberVO();
+		smvo.setSno(sno);
+		SMemberDAO smdao = new SMemberDAOImpl();
+		arraySmemSearch = smdao.sMemSearch(smvo);
+		System.out.println("[log] SMemberScr >>>\n"
+						+ "데이터확인 arraySmemSearch.size() : " + arraySmemSearch.size());
+		
+		return arraySmemSearch;
+	}// end of sMemSearch
+	
+	// 6. 이름으로 검색(like)
+	public ArrayList<SMemberVO> sMemLikeSearch(String sname){
+		System.out.println("[log] SMemberScr.sMemLikeSearch 함수 시작! >>>\n"
+													+ "데이터확인 sname : " + sname);
+		SMemberDAO smdao = new SMemberDAOImpl();
+		ArrayList<SMemberVO> arraySmemLikeSearch = null;
+		SMemberVO smvo = new SMemberVO();
+		smvo.setSname(sname);
+		
+		arraySmemLikeSearch = smdao.sMemLikeSearch(smvo);
+		
+		return arraySmemLikeSearch;
+	}// end of sMemLikeSearch
+	
+	// 출력 함수(printOut)
+	public void sMemPrintOut(ArrayList<SMemberVO> aListMember){
+		System.out.println("SMemberScr 프린트 함수 호출!\n"
+						+ "데이터확인 aListMember.size() : " + aListMember.size());
+		String sno = "";
+		String sname = "";
+		String spw = "";
+		String sbirth = "";
+		String shp = "";
+		String smail = "";
+		String spost = "";
+		String saddr = "";
+		String sinsertdate = "";
+		String supdatedate = "";
+		String sdeleteyn = "";
+		SMemberVO smvo = null;
+		
+		if(aListMember.size()>0){
+			for(int i=0;i<aListMember.size();i++){
+				smvo = new SMemberVO();
+				smvo = aListMember.get(i);
+				sno = smvo.getSno();
+				sname = smvo.getSname();
+				spw = smvo.getSpw();
+				sbirth = smvo.getSbirth();
+				shp = smvo.getShp();
+				smail = smvo.getSmail();
+				spost = smvo.getSpost();
+				saddr = smvo.getSaddr();
+				sinsertdate = smvo.getSinsertdate();
+				supdatedate = smvo.getSupdatedate();
+				sdeleteyn = smvo.getSdeleteyn();
+				System.out.println(i+1 + ". " + sno + "/" + sname + "/" + spw + "/"
+								+ sbirth + "/" + shp + "/" + smail + "/" + spost + "/"
+								+ saddr + "/" + sinsertdate + "/" + supdatedate + "/"
+								+ sdeleteyn);
+			}// end of for
+		}else{
+			System.out.println("조회할 회원이 없습니다.");
+		}// end of if-else	
+		
+	}// end of sMemPrintOut()
 	
 	// main 함수 시작
 	public static void main(String[] args) {
@@ -139,8 +203,8 @@ public class SMemberScr {
 				+ "2.비밀번호 수정\n"
 				+ "3.회원 탈퇴\n"
 				+ "4.전체 회원 조회\n"
-				+ "5.회원번호 검색\n"
-				+ "6.이름 검색(like검색)\n"
+				+ "5.회원번호로 조회\n"
+				+ "6.이름으로 검색(like)\n"
 				+ ">>> ");
 		
 		String strNum = scan.nextLine();
@@ -209,6 +273,7 @@ public class SMemberScr {
 			}// end of if else
 		
 		}// end of if(delete)
+		
 		// 4. 전체회원 조회(select)
 		if(strNum.equals("4")){
 			System.out.println("if문 4.전체회원 조회");
@@ -218,32 +283,38 @@ public class SMemberScr {
 			
 			// 전체회원 조회 함수 호출
 			arraySmemSelect = smsc.sMemSelect();
-			
-			String test = arraySmemSelect.get(0).getSname();
-			System.out.println("test : " + test);
-			
-			for(int i=0; i<arraySmemSelect.size(); i++){
-				svo = new SMemberVO();
-				svo = arraySmemSelect.get(i);
-				
-				sno = svo.getSno();
-				sname = svo.getSname();
-				spw = svo.getSpw();
-				sbirth = svo.getSbirth();
-				shp = svo.getShp();
-				smail = svo.getSmail();
-				spost = svo.getSpost();
-				saddr = svo.getSaddr();
-				sinsertdate = svo.getSinsertdate();
-				supdatedate = svo.getSupdatedate();
-				sdeleteyn = svo.getSdeleteyn();
-				System.out.println(i+1 + ". " + sno + "/" + sname + "/" + spw + "/"
-								+ sbirth + "/" + shp + "/" + smail + "/" + spost + "/"
-								+ saddr + "/" + sinsertdate + "/" + supdatedate + "/"
-								+ sdeleteyn);
-			}// end of for
+
+			// 데이터 출력
+			smsc.sMemPrintOut(arraySmemSelect);
 			
 		}// end of if(전체회원 조회)
+		
+		// 5.회원번호로 검색(search)
+		if(strNum.equals("5")){
+			System.out.println("if문 5.회원번호로 검색");
+			
+			System.out.println("검색할 회원번호를 입력해주세요. >>> ");
+			sno = scan.nextLine();
+			
+			ArrayList<SMemberVO> arraySmemSearch = smsc.sMemSearch(sno);
+			
+			// 데이터 출력
+			smsc.sMemPrintOut(arraySmemSearch);
+					
+		}// end of if(5)
+		
+		// 6.이름으로 검색(like)
+		if(strNum.equals("6")){
+			System.out.println("if문 6.이름으로 검색");
+			
+			System.out.println("검색할 회원의 이름을 입력해주세요. >>> ");
+			sname = scan.nextLine();
+			ArrayList<SMemberVO> arraySmemLikeSearch = smsc.sMemLikeSearch(sname);
+			
+			// 데이터출력
+			smsc.sMemPrintOut(arraySmemLikeSearch);
+			
+		}// end of if(6)
 		
 		System.out.println("[log] SMemberScr 클래스 >>> main 함수 끝");
 	}// end of main

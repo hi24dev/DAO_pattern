@@ -35,8 +35,59 @@ public class SjhSqlQueryMap {
 	}// end of getSelectQuery()
 	
 	// 회원번호 검색(search)
+	public static String getSearchQuery(){
+		System.out.println("[log] getSearchQuery() 함수 시작");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(" SELECT							\n");
+		sb.append("		 	 S.SNO	        SNO		\n");
+		sb.append(" 		,S.SNAME	   	SNAME	\n");
+		sb.append(" 		,S.SPW	        SPW		\n");
+		sb.append(" 		,S.SBIRTH	   	SBIRTH	\n");
+		sb.append(" 		,S.SHP 	        SHP		\n");
+		sb.append(" 		,S.SMAIL	    SMAIL	\n");
+		sb.append(" 		,S.SPOST	    SPOST	\n");
+		sb.append(" 		,S.SADDR	    SADDR	\n");
+		sb.append(" 		,TO_CHAR(S.SINSERTDATE,'YYYY-MM-DD')	SINSERTDATE	\n");
+		sb.append(" 		,TO_CHAR(S.SUPDATEDATE,'YYYY-MM-DD')	SUPDATEDATE	\n");
+		sb.append(" 		,S.SDELETEYN	SDELETEYN	\n");
+		sb.append(" FROM  SMEMBER_CONTACT   S		\n");
+		sb.append(" WHERE S.SNO = ?					\n");
+		sb.append(" AND	  S.SDELETEYN = 'N'			  ");		
+		
+		String searchStr = sb.toString();
+		System.out.println("[log] getSearchQuery() 함수 끝");
+		return searchStr;
+	}// end of getSearchQuery()
 	
 	// 이름 검색(likeSearch)
+	public static String getLikeSearchQuery(){
+		System.out.println("[log] getLikeSearchQuery() 함수 시작");
+		
+		String likeSearchStr = "";
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(" SELECT							\n");
+		sb.append("		 	 S.SNO	        SNO		\n");
+		sb.append(" 		,S.SNAME	   	SNAME	\n");
+		sb.append(" 		,S.SPW	        SPW		\n");
+		sb.append(" 		,S.SBIRTH	   	SBIRTH	\n");
+		sb.append(" 		,S.SHP 	        SHP		\n");
+		sb.append(" 		,S.SMAIL	    SMAIL	\n");
+		sb.append(" 		,S.SPOST	    SPOST	\n");
+		sb.append(" 		,S.SADDR	    SADDR	\n");
+		sb.append(" 		,TO_CHAR(S.SINSERTDATE,'YYYY-MM-DD')	SINSERTDATE	\n");
+		sb.append(" 		,TO_CHAR(S.SUPDATEDATE,'YYYY-MM-DD')	SUPDATEDATE	\n");
+		sb.append(" 		,S.SDELETEYN	SDELETEYN	\n");
+		sb.append(" FROM  SMEMBER_CONTACT   S		\n");
+		sb.append(" WHERE S.SNAME LIKE '%' ||?|| '%'	\n");
+		sb.append(" AND	  S.SDELETEYN = 'N'			  ");				
+	
+		likeSearchStr = sb.toString();
+		
+		System.out.println("[log] getLikeSearchQuery() 함수 끝");
+		return likeSearchStr;
+	}// end of getLikeSearchQuery()
 	
 	// 회원등록(insert)
 	public static String getInsertQuery(){
