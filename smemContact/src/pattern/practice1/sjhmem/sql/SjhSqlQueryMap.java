@@ -60,7 +60,7 @@ public class SjhSqlQueryMap {
 		return searchStr;
 	}// end of getSearchQuery()
 	
-	// 이름 검색(likeSearch)
+	// 이름으로 검색(likeSearch)
 	public static String getLikeSearchQuery(){
 //		System.out.println("[log] getLikeSearchQuery() 함수 시작");
 		

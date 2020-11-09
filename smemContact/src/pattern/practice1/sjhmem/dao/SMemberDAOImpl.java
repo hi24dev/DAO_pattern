@@ -198,7 +198,7 @@ public class SMemberDAOImpl implements SMemberDAO {
 		return alist;
 	}// end of sMemSelect()
 
-	// 5.회원번호조회
+	// 5.회원번호로 조회
 	@Override
 	public ArrayList<SMemberVO> sMemSearch(SMemberVO _smvo){
 //		System.out.println("[log] 다오임플 sMemSearch 함수 호출!\n"
@@ -254,7 +254,7 @@ public class SMemberDAOImpl implements SMemberDAO {
 		return arraySmemSearch;
 	}// end of sMemSearch
 
-	// 6.이름으로조회
+	// 6.이름으로 조회
 	@Override
 	public ArrayList<SMemberVO> sMemLikeSearch(SMemberVO _smvo){
 //		System.out.println("[log] 다오임플 sMemLikeSearch 함수 호출! >>> \n"

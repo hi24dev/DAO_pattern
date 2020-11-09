@@ -37,7 +37,6 @@ public abstract class SjhChaebun {
 			if(rsRs!=null){
 				while(rsBool){
 					commno = rsRs.getString("commno");
-//					System.out.println("데이터확인 commno : " + commno);
 					rsBool = false;
 				}// end of while
 			}// end of if

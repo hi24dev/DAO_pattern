@@ -49,7 +49,6 @@ public class SMemberScr {
 		// dao¿¬°á
 		SMemberDAO smdao = new SMemberDAOImpl();
 		insertBool = smdao.sMemInsert(smvo);
-//		System.out.println("insertBool : " + insertBool);
 		
 		return insertBool;
 	}// end of sMemInsert(){}

@@ -30,7 +30,7 @@ public abstract class SjhConnProperty {
 		return con;
 	}// end of getConnection()
 	
-	// sql²÷±â conClose(con,pstmt,rsRs)
+	// db²÷±â conClose(con,pstmt,rsRs)
 	public static void conClose( Connection con
 								,PreparedStatement pstmt
 								,ResultSet rsRs){
@@ -47,7 +47,7 @@ public abstract class SjhConnProperty {
 //		System.out.println("[log] conClose(con,pstmt,rsRs) ÇÔ¼ö ³¡ ");
 	}// end of conClose(con,pstmt,rsRs)
 	
-	// sql²÷±â conClose(con,pstmt,rsRs)
+	// db²÷±â conClose(con,pstmt,rsRs)
 	public static void conClose( Connection con
 								,PreparedStatement pstmt){
 //		System.out.println("[log] pattern.practice1.sjhmem.common.SjhConnPropertyÅ¬·¡½º"

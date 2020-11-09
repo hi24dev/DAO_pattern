@@ -14,8 +14,8 @@ public interface SMemberDAO {
 	public boolean sMemDelete(SMemberVO smvo);
 	// 4. 전체조회
 	public ArrayList<SMemberVO> sMemSelect();
-	// 5. 회원번호조회
+	// 5. 회원번호로 조회
 	public ArrayList<SMemberVO> sMemSearch(SMemberVO smvo);
-	// 6. 이름조회
+	// 6. 이름으로 조회
 	public ArrayList<SMemberVO> sMemLikeSearch(SMemberVO smvo);
 }// end of interface SMemberDAO
